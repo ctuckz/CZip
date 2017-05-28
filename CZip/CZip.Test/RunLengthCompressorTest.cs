@@ -9,6 +9,7 @@ using NUnit.Framework;
 namespace CZip.Test
 {
     [TestFixture]
+    [TestOf(typeof(RunLengthCompressor))]
     public class RunLengthCompressorTest
     {
         [Test]
@@ -20,12 +21,24 @@ namespace CZip.Test
         {
             RunLengthCompressor compressor = new RunLengthCompressor();
             using (MemoryStream inputStream = new MemoryStream(input))
+            using (Stream output = await compressor.CompressAsync(inputStream))
             {
-                Stream output = await compressor.CompressAsync(inputStream);
 
                 byte[] buffer = new byte[output.Length];
                 await output.ReadAsync(buffer, 0, buffer.Length);
                 return buffer;
+            }
+        }
+
+        [Test]
+        public async Task Compress__ReturnedStreamAtPos0()
+        {
+            RunLengthCompressor compressor = new RunLengthCompressor();
+
+            using (MemoryStream input = new MemoryStream(new byte[] { 2, 2 }))
+            using (Stream output = await compressor.CompressAsync(input))
+            {
+                Assert.That(output.Position, Is.EqualTo(0));
             }
         }
     }

@@ -50,9 +50,9 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="BinaryCompressorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RunLengthCompressorTest.cs" />
+    <Compile Include="RunLengthDecompressorTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
