@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CZip.Console
+namespace CZip
 {
-    public static class AlgorithmFactory
+    public class AlgorithmFactory : IAlgorithmFactory
     {
-        public static ICompressor GetCompressor(Algorithm alg)
+        public ICompressor GetCompressor(Algorithm alg)
         {
             switch (alg)
             {
@@ -18,6 +18,11 @@ namespace CZip.Console
                 case Algorithm.Unknown:
                     throw new ArgumentException(nameof(alg));
             }
+        }
+
+        public IDecompressor GeteDecompressor(Algorithm algorithm)
+        {
+            throw new NotImplementedException();
         }
     }
 }

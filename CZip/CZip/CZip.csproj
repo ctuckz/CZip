@@ -40,7 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BinaryCompressor.cs" />
+    <Compile Include="Algorithm.cs" />
+    <Compile Include="AlgorithmFactory.cs" />
+    <Compile Include="IAlgorithmFactory.cs" />
     <Compile Include="ICompressor.cs" />
     <Compile Include="IDecompressor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

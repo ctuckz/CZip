@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using CZip;
 using Con = System.Console;
 
-namespace CZip.Console
+namespace CZip.Shell
 {
     class Program
     {
@@ -80,56 +80,16 @@ namespace CZip.Console
             if (compress)
             {
                 // Compress input
-                switch (alg)
+                // TODO: Set up DI container so we can DI all this stuff
+                using (Stream output = await new ConsoleCompressor(new AlgorithmFactory()).Compress(alg, input))
                 {
-                    case Algorithm.Runlegnth:
-                        using (Stream output = await RunLengthCompress(input))
-                        {
-                            // TODO
-                        }
-                        break;
-                    case Algorithm.Unknown:
-                    default:
-                        throw new Exception($"Invalid algorithm: {alg.ToString()}");
+                    // TODO: Save to file
                 }
             }
             else
             {
                 // Decompress the input
-
-            }
-        }
-
-        private static async Task<Stream> RunLengthCompress(string inputPath)
-        {
-            using (FileStream s = File.OpenRead(inputPath))
-            {
-                long originalSize = s.Length;
-                Con.WriteLine($"Original size: {originalSize} bytes");
-                Con.Write("Compressing...");
-
-                RunLengthCompressor compressor = new RunLengthCompressor();
-                Stream output = await compressor.CompressAsync(s);
-                try
-                {                
-                    Con.WriteLine("\nDone");
-                    long compressedLength = output.Length;
-
-                    ConsoleColor originalColor = Con.ForegroundColor;
-                    Con.ForegroundColor = ConsoleColor.DarkYellow;
-
-                    Con.WriteLine($"Output size: {compressedLength} bytes");
-                    Con.WriteLine($"Compression ratio: {(compressedLength * 100) / originalSize}%");
-                    
-                    Con.ForegroundColor = originalColor;
-
-                    return output;
-                }
-                catch
-                {
-                    output.Dispose();
-                    throw;
-                }
+                throw new NotImplementedException();
             }
         }
     }

@@ -7,8 +7,8 @@
     <ProjectGuid>{69DC0174-1CCE-4EE2-B646-44AB6281876A}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CZip.Console</RootNamespace>
-    <AssemblyName>CZip.Console</AssemblyName>
+    <RootNamespace>CZip.Shell</RootNamespace>
+    <AssemblyName>CZip.Shell</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,8 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Algorithm.cs" />
-    <Compile Include="AlgorithmFactory.cs" />
+    <Compile Include="ConsoleCompressor.cs" />
+    <Compile Include="IConsoleCompressor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

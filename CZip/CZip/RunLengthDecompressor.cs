@@ -9,7 +9,7 @@ namespace CZip
 {
     public class RunLengthDecompressor : IDecompressor
     {
-        public async Task<Stream> Decompress(Stream input)
+        public Task<Stream> DecompressAsync(Stream input)
         {
             if (input == null)
             {
@@ -20,7 +20,7 @@ namespace CZip
             if (iVersion == -1)
             {
                 // The input stream was empty
-                return Stream.Null;
+                return Task.FromResult(Stream.Null);
             }
 
             // This is a safe conversion - the int will always fit into a byte unless it is -1
@@ -28,7 +28,7 @@ namespace CZip
             switch (version)
             {
                 case RunLengthCompressor.VERSION_ONE:
-                    return await DecompressV1(input);
+                    return DecompressV1(input);
                 default:
                     throw new InvalidOperationException($"Unknown version: {version}");
             }
@@ -39,6 +39,7 @@ namespace CZip
             Stream output = new MemoryStream();
             try
             {
+                // TODO: Performance profile reading larger amounts from stream
                 byte[] buffer = new byte[2];
                 while ((await input.ReadAsync(buffer, 0, 2)) > 0)
                 {
@@ -49,6 +50,7 @@ namespace CZip
                     await output.WriteAsync(bytes, 0, bytes.Length);
                 }
 
+                output.Position = 0;
                 return output;
             }
             catch

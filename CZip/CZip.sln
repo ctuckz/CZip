@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CZip", "CZip\CZip.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CZip.Test", "CZip.Test\CZip.Test.csproj", "{863F181D-35CC-4A47-AF13-82393AE97B38}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CZip.Console", "CZip.Console\CZip.Console.csproj", "{69DC0174-1CCE-4EE2-B646-44AB6281876A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CZip.Shell", "CZip.Console\CZip.Shell.csproj", "{69DC0174-1CCE-4EE2-B646-44AB6281876A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

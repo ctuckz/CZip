@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CZip
+namespace CZip.Shell
 {
-    public interface IDecompressor
+    public interface IConsoleCompressor
     {
-        Task<Stream> DecompressAsync(Stream input);
+        Task<Stream> Compress(Algorithm algorithm, string path);
     }
 }
