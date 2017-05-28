@@ -44,7 +44,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConsoleCompressor.cs" />
+    <Compile Include="ConsoleDecompressor.cs" />
     <Compile Include="IConsoleCompressor.cs" />
+    <Compile Include="IConsoleDecompressor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

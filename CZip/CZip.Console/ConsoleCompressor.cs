@@ -21,33 +21,34 @@ namespace CZip.Shell
 
         private IAlgorithmFactory Factory { get; }
 
-        public async Task<Stream> Compress(Algorithm algorithm, string path)
+        public async Task<Stream> CompressAsync(Algorithm algorithm, string path)
         {
             if (string.IsNullOrWhiteSpace(path))
             {
                 throw new ArgumentException(nameof(path));
             }
 
+            Console.WriteLine("Compressing...");
             using (FileStream s = File.OpenRead(path))
             {
                 long originalSize = s.Length;
                 Console.WriteLine($"Original size: {originalSize} bytes");
-                Console.Write("Compressing...");
 
                 ICompressor compressor = Factory.GetCompressor(algorithm);
                 Stream output = await compressor.CompressAsync(s);
                 try
                 {
-                    Console.WriteLine("\nDone");
-                    long compressedLength = output.Length;
+                    long compressedLength = output.Length;                  
+                    Console.WriteLine($"Output size: {compressedLength} bytes");
 
                     ConsoleColor originalColor = Console.ForegroundColor;
                     Console.ForegroundColor = ConsoleColor.DarkYellow;
 
-                    Console.WriteLine($"Output size: {compressedLength} bytes");
                     Console.WriteLine($"Compression ratio: {(compressedLength * 100) / originalSize}%");
 
                     Console.ForegroundColor = originalColor;
+
+                    Console.WriteLine("Done");
 
                     return output;
                 }

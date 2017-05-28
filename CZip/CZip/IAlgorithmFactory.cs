@@ -9,6 +9,6 @@ namespace CZip
     public interface IAlgorithmFactory
     {
         ICompressor GetCompressor(Algorithm algorithm);
-        IDecompressor GeteDecompressor(Algorithm algorithm);
+        IDecompressor GetDecompressor(Algorithm algorithm);
     }
 }

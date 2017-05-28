@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CZip;
-using Con = System.Console;
 
 namespace CZip.Shell
 {
@@ -18,6 +17,8 @@ namespace CZip.Shell
         private const string ALGORITHM_RUNLENGTH = "rl";
 
         private const string INPUT = "-i";
+
+        private const string OUTPUT = "-o";
        
         static void Main(string[] args)
         {
@@ -30,7 +31,8 @@ namespace CZip.Shell
         {
             bool compress = false;
             Algorithm alg = Algorithm.Unknown;
-            string input = null;
+            string inputPath = null;
+            string outputPath = null;
 
             int i = 0;
             while(i < args.Length)
@@ -45,13 +47,17 @@ namespace CZip.Shell
                         }
                         else
                         {
-                            Con.WriteLine($"Unknown algorithm: {args[i]}");
+                            Console.WriteLine($"Unknown algorithm: {args[i]}");
                             return;
                         }
                         break;
                     case INPUT:
                         i++;
-                        input = args[i];
+                        inputPath = args[i];
+                        break;
+                    case OUTPUT:
+                        i++;
+                        outputPath = args[i];
                         break;
                     case COMPRESS:
                         compress = true;
@@ -60,36 +66,79 @@ namespace CZip.Shell
                         compress = false;
                         break;
                     default:
-                        Con.WriteLine($"Unknown command: {args[i]}");
+                        Console.WriteLine($"Unknown command: {args[i]}");
                         return;
                 }
                 i++;
             }
 
             // Validate inputs
-            if (alg == Algorithm.Unknown || string.IsNullOrWhiteSpace(input))
+            if (alg == Algorithm.Unknown || string.IsNullOrWhiteSpace(inputPath))
             {
-                Con.WriteLine("Algorithm and input path must be set");
+                Console.WriteLine("Algorithm and input path must be set");
                 return;
             }
-            if (!File.Exists(input))
+            if (string.IsNullOrWhiteSpace(inputPath))
             {
-                Con.WriteLine($"Could not find file: {input}");
+                Console.WriteLine("An input path is required. Use -i to set the input path.");
+            }
+            if (!File.Exists(inputPath))
+            {
+                Console.WriteLine($"Could not find file: {inputPath}");
+            }
+            if (string.IsNullOrWhiteSpace(outputPath))
+            {
+                Console.WriteLine("An output path is required. Use -o to set the output path.");
+            }
+            if (File.Exists(outputPath))
+            {
+                bool? overwrite = null;
+                do
+                {
+                    ConsoleColor originalColor = Console.ForegroundColor;
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.Write($"A file already exists at {outputPath}. Overwrite it? (Y/N): ");
+                    Console.ForegroundColor = originalColor;
+
+                    string entry = Console.ReadKey().KeyChar.ToString();
+                    Console.WriteLine();
+
+                    if (string.Equals(entry, "y", StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        overwrite = true;
+                    }
+                    else if (string.Equals(entry, "n", StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        overwrite = false;
+                    }
+                }
+                while (overwrite == null);
+
+                if (overwrite != true)
+                {
+                    return;
+                }
             }
 
             if (compress)
             {
                 // Compress input
                 // TODO: Set up DI container so we can DI all this stuff
-                using (Stream output = await new ConsoleCompressor(new AlgorithmFactory()).Compress(alg, input))
+                using (Stream output = await new ConsoleCompressor(new AlgorithmFactory()).CompressAsync(alg, inputPath))          
+                using (FileStream outStream = new FileStream(outputPath, FileMode.Create))
                 {
-                    // TODO: Save to file
-                }
+                    await output.CopyToAsync(outStream);
+                }            
             }
             else
             {
                 // Decompress the input
-                throw new NotImplementedException();
+                // TODO: DI this too
+                using (Stream output = await new ConsoleDecompressor(new AlgorithmFactory()).DecompressAsync(alg, inputPath))
+                using (FileStream outStream = new FileStream(outputPath, FileMode.Create))
+                {
+                    await output.CopyToAsync(outStream);
+                }
             }
         }
     }

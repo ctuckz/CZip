@@ -8,21 +8,28 @@ namespace CZip
 {
     public class AlgorithmFactory : IAlgorithmFactory
     {
-        public ICompressor GetCompressor(Algorithm alg)
+        public ICompressor GetCompressor(Algorithm algorithm)
         {
-            switch (alg)
+            switch (algorithm)
             {
                 case Algorithm.Runlegnth:
                     return new RunLengthCompressor();
                 default:
                 case Algorithm.Unknown:
-                    throw new ArgumentException(nameof(alg));
+                    throw new ArgumentException(nameof(algorithm));
             }
         }
 
-        public IDecompressor GeteDecompressor(Algorithm algorithm)
+        public IDecompressor GetDecompressor(Algorithm algorithm)
         {
-            throw new NotImplementedException();
+            switch (algorithm)
+            {
+                case Algorithm.Runlegnth:
+                    return new RunLengthDecompressor();
+                default:
+                case Algorithm.Unknown:
+                    throw new ArgumentException(nameof(algorithm));
+            }
         }
     }
 }
