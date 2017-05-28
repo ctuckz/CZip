@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CZip", "CZip\CZip.csproj", "{2DA657C4-699E-414F-9C76-48C6EB19727F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CZip.Test", "CZip.Test\CZip.Test.csproj", "{863F181D-35CC-4A47-AF13-82393AE97B38}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CZip.Console", "CZip.Console\CZip.Console.csproj", "{69DC0174-1CCE-4EE2-B646-44AB6281876A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2DA657C4-699E-414F-9C76-48C6EB19727F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DA657C4-699E-414F-9C76-48C6EB19727F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DA657C4-699E-414F-9C76-48C6EB19727F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DA657C4-699E-414F-9C76-48C6EB19727F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{863F181D-35CC-4A47-AF13-82393AE97B38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{863F181D-35CC-4A47-AF13-82393AE97B38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{863F181D-35CC-4A47-AF13-82393AE97B38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{863F181D-35CC-4A47-AF13-82393AE97B38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69DC0174-1CCE-4EE2-B646-44AB6281876A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69DC0174-1CCE-4EE2-B646-44AB6281876A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69DC0174-1CCE-4EE2-B646-44AB6281876A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69DC0174-1CCE-4EE2-B646-44AB6281876A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
