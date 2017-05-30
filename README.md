@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/ctuckz/CZip.svg?branch=master)](https://travis-ci.org/ctuckz/CZip)
+
 # CZip
 A project to learn about compression by implementing several different compression algorithms.
 
