@@ -1,5 +1,5 @@
 language: csharp
-solution: CZip.sln
+solution: CZip/CZip.sln
 mono: none
 dotnet: 1.0.1
 dist: trusty
