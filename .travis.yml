@@ -3,5 +3,9 @@ solution: ./CZip/CZip.sln
 #mono: none
 #dotnet: 1.0.1
 #dist: trusty
+install:
+  - nuget restore ./CZip/CZip.sln
+  - nuget install NUnit.ConsoleRunner
 script:
   - xbuild /p:Configuration=Release ./CZip/CZip.sln
+  - mono ./CZip/packages/NUnit.ConsoleRunner.*/tools/nunit3-console.exe ./CZip/CZip.Test/bin/Release/CZip.Test.dll
